@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { Gist } from "types"
 
 type Props = {
@@ -8,15 +8,10 @@ type Props = {
 const API_KEY = import.meta.env.VITE_API_KEY
 
 const useFetchGists = ({ search }: Props) => {
-  return useQuery<Gist[]>(
-    ["gists", search],
-    () =>
-      fetch(`https://api.github.com/users/${search}/gists`, {
-        headers: { Authorization: `token ${API_KEY}` },
-      }).then((res) => res.json()),
-    {
-      enabled: !!search,
-    }
+  return useMutation<Gist[]>(["gists", search], () =>
+    fetch(`https://api.github.com/users/${search}/gists`, {
+      headers: { Authorization: `token ${API_KEY}` },
+    }).then((res) => res.json())
   )
 }
 

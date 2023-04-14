@@ -54,3 +54,10 @@ export interface Owner {
   type?: string
   site_admin?: boolean
 }
+
+export type Order = "asc" | "desc"
+
+export interface HeadCellType {
+  id: string
+  label: string
+}
