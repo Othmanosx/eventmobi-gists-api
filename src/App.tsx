@@ -3,7 +3,7 @@ import "./App.css"
 import useFetchGists from "Queries/useFetchGists"
 import { TableCell } from "@mui/material"
 import { StyledTableRow } from "components/Table/StyledTableRow"
-import { Table, Search } from "components"
+import { Table, Search, Forks } from "components"
 
 const headCells = [
   {
@@ -39,6 +39,7 @@ function App() {
         onChange={(e) => setUsername(e.target.value)}
         handleSubmit={handleSubmit}
       />
+
       <Table
         data={gists}
         isLoading={isLoading}
@@ -56,7 +57,9 @@ function App() {
                   <div key={file.filename}>{file.filename}</div>
                 ))}
               </TableCell>
-              <TableCell>forks</TableCell>
+              <TableCell>
+                <Forks gistId={row?.id} />
+              </TableCell>
             </StyledTableRow>
           )
         }}
