@@ -1,9 +1,9 @@
-import { MouseEventHandler, useState } from "react"
+import { FormEventHandler, useState } from "react"
 import "./App.css"
 import useFetchGists from "Queries/useFetchGists"
-import { Table } from "components"
 import { TableCell } from "@mui/material"
 import { StyledTableRow } from "components/Table/StyledTableRow"
+import { Table, Search } from "components"
 
 const headCells = [
   {
@@ -26,7 +26,7 @@ function App() {
 
   const { isLoading, data: gists, mutate } = useFetchGists({ search })
 
-  const handleSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setSearch(username)
     mutate()
@@ -34,12 +34,11 @@ function App() {
 
   return (
     <div style={{ width: "100%" }}>
-      <input
-        type="text"
+      <Search
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        handleSubmit={handleSubmit}
       />
-      <button onClick={handleSubmit}>search</button>
       <Table
         data={gists}
         isLoading={isLoading}
