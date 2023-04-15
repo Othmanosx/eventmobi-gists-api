@@ -3,11 +3,11 @@ import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import Paper from "@mui/material/Paper"
-import { LinearProgress, TablePagination, Typography } from "@mui/material"
+import { TablePagination, Typography } from "@mui/material"
 import { HeadCellType, Order } from "types"
 import EnhancedTableHead from "./TableHead"
 import { getComparator, stableSort } from "utils/tableUtils"
-import { useState, ChangeEvent, MouseEvent, ReactNode, RefObject } from "react"
+import { useState, ChangeEvent, MouseEvent, ReactNode } from "react"
 import LoadingSkeleton from "./LoadingSkeleton"
 import { StyledTableRow } from "./StyledTableRow"
 
@@ -56,7 +56,7 @@ export default function EnhancedTable<T>({
   )
 
   return (
-    <Paper elevation={2} sx={{ borderRadius: 2, border: "1px solid #D0D5DD" }}>
+    <Paper sx={{ border: "1px solid #D0D5DD" }}>
       <TableContainer>
         <Table>
           <EnhancedTableHead
