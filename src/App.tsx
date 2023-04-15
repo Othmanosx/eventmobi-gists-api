@@ -21,7 +21,7 @@ const headCells = [
 ]
 
 function App() {
-  const [username, setUsername] = useState("mojombo")
+  const [username, setUsername] = useState("")
   const [search, setSearch] = useState("")
 
   const { isLoading, data: gists, mutate, isError } = useFetchGists({ search })
