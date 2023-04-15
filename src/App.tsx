@@ -3,7 +3,7 @@ import "./App.css"
 import useFetchGists from "Queries/useFetchGists"
 import { TableCell } from "@mui/material"
 import { StyledTableRow } from "components/Table/StyledTableRow"
-import { Table, Search, Forks } from "components"
+import { Table, Search, Forks, Badge } from "components"
 
 const headCells = [
   {
@@ -54,7 +54,7 @@ function App() {
 
               <TableCell>
                 {files?.map((file) => (
-                  <div key={file.filename}>{file.filename}</div>
+                  <Badge key={file.filename} file={file} />
                 ))}
               </TableCell>
               <TableCell>
