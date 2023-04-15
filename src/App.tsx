@@ -1,7 +1,7 @@
 import { FormEventHandler, useState } from "react"
 import "./App.css"
 import useFetchGists from "Queries/useFetchGists"
-import { TableCell } from "@mui/material"
+import { Alert, TableCell } from "@mui/material"
 import { StyledTableRow } from "components/Table/StyledTableRow"
 import { Table, Search, Forks, Badge } from "components"
 
@@ -24,8 +24,8 @@ function App() {
   const [username, setUsername] = useState("mojombo")
   const [search, setSearch] = useState("")
 
-  const { isLoading, data: gists, mutate } = useFetchGists({ search })
-
+  const { isLoading, data: gists, mutate, isError } = useFetchGists({ search })
+  const error = isError || gists?.message
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setSearch(username)
@@ -39,7 +39,11 @@ function App() {
         onChange={(e) => setUsername(e.target.value)}
         handleSubmit={handleSubmit}
       />
-
+      {error && (
+        <Alert severity="error" sx={{ m: 3 }}>
+          {`Error: ${gists?.message || "Unable to fetch gists"}`}
+        </Alert>
+      )}
       <Table
         data={gists}
         isLoading={isLoading}

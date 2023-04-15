@@ -13,23 +13,23 @@ const Forks = ({ gistId }: { gistId?: string }) => {
   if (isError) return <div>Error loading forks</div>
 
   return (
-    <div>
-      <AvatarGroup>
-        {forks?.length > 0
-          ? forks?.map((fork) => (
-              <Avatar
-                component={Link}
-                href={fork?.html_url}
-                key={fork.id}
-                src={fork?.owner?.avatar_url}
-                alt={fork?.owner?.login}
-                title={fork?.owner?.login}
-                target="_blank"
-              />
-            ))
-          : "No Forks"}
-      </AvatarGroup>
-    </div>
+    <AvatarGroup>
+      {forks?.length > 0 ? (
+        forks?.map((fork) => (
+          <Avatar
+            component={Link}
+            href={fork?.html_url}
+            key={fork.id}
+            src={fork?.owner?.avatar_url}
+            alt={fork?.owner?.login}
+            title={fork?.owner?.login}
+            target="_blank"
+          />
+        ))
+      ) : (
+        <p>No Forks</p>
+      )}
+    </AvatarGroup>
   )
 }
 
