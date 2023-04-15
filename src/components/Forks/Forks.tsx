@@ -19,7 +19,7 @@ const Forks = ({ gistId }: { gistId?: string }) => {
           ? forks?.map((fork) => (
               <Avatar
                 component={Link}
-                href={fork?.owner?.avatar_url}
+                href={fork?.html_url}
                 key={fork.id}
                 src={fork?.owner?.avatar_url}
                 alt={fork?.owner?.login}
