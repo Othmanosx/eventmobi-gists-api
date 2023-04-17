@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import {
   beforeAll,
   afterEach,
@@ -10,7 +10,6 @@ import {
 } from "vitest"
 import { rest } from "msw"
 import { setupServer } from "msw/node"
-import userEvent from "@testing-library/user-event"
 import App from "./App"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactNode } from "react"
@@ -65,15 +64,15 @@ test("renders the search input and table", async () => {
 })
 
 describe("App", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     render(<App />, { wrapper })
     const searchInput = screen.getByPlaceholderText("Enter GitHub username")
     const searchButton = screen.getByRole("button", { name: "Search" })
 
     // Perform a search
     act(() => {
-      userEvent.type(searchInput, "mojombo")
-      userEvent.click(searchButton)
+      fireEvent.change(searchInput, { target: { value: "mojombo" } })
+      fireEvent.click(searchButton)
     })
   })
 
